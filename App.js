@@ -4,6 +4,7 @@ import { View } from "react-native";
 import LittleLemonHeader from "./components/LittleLemonHeader";
 import LittleLemonFooter from "./components/LittleLemonFooter";
 import WelcomeScreen from "./components/WelcomeScreen";
+import LoginPage from "./components/LoginPage";
 
 export default function App() {
   return (
@@ -15,7 +16,8 @@ export default function App() {
         }}
       >
         <LittleLemonHeader />
-        <WelcomeScreen />
+        {/* <WelcomeScreen /> */}
+        <LoginPage />
       </View>
       <View style={{ backgroundColor: "#495E57" }}>
         <LittleLemonFooter />

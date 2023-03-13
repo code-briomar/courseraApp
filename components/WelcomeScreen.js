@@ -38,7 +38,6 @@ const WelcomeScreen = () => {
           placeholder={"Your first name, e.g Freisser"}
           multiline={true}
           maxLength={4}
-          keyboardType={"url"}
           secureTextEntry={true}
         />
       </KeyboardAvoidingView>
