@@ -1,73 +1,124 @@
-import { useState } from "react";
-import {
-  ScrollView,
-  Text,
-  TextInput,
-  StyleSheet,
-  KeyboardAvoidingView,
-} from "react-native";
+import React, { useState } from "react";
+import { StyleSheet, Text, Pressable, SectionList, View } from "react-native";
 
+//Data to be displayed -> MENU
+const menuItemsToDisplay = [
+  {
+    title: "Appetizers",
+    data: [
+      "Hummus",
+      "Moutabal",
+      "Falafel",
+      "Marinated Olives",
+      "Kofta",
+      "Eggplant Salad",
+    ],
+  },
+  {
+    title: "Main Dishes",
+    data: ["Lentil Burger", "Smoked Salmon", "Kofta Burger", "Turkish Kebab"],
+  },
+  {
+    title: "Sides",
+    data: [
+      "Fries",
+      "Buttered Rice",
+      "Bread Sticks",
+      "Pita Pocket",
+      "Lentil Soup",
+      "Greek Salad",
+      "Rice Pilaf",
+    ],
+  },
+  {
+    title: "Desserts",
+    data: ["Baklava", "Tartufo", "Tiramisu", "Panna Cotta"],
+  },
+];
+
+// CUSTOM ITEM COMPONENT
+const Item = (props) => (
+  <View style={pretty.innerContainer}>
+    <Text style={pretty.itemText}>{props.name}</Text>
+  </View>
+);
 const WelcomeScreen = () => {
-  const [firstName, onChangeFirstName] = useState("");
+  const [showMenu, setShowMenu] = useState(false);
 
+  // RENDER ITEMS OF THE MENU
+  const renderItem = ({ item }) => <Item name={item} />;
+  const renderSectionHeader = ({ section: { title } }) => (
+    <Text style={pretty.sectionHeader}>{title}</Text>
+  );
   return (
-    <ScrollView style={menuStyles.container} keyboardDismissMode="on-drag">
-      {/* The keyboardDismissMode property applied to the ScrollView component closes the virtual keyboard when the user starts to scroll, this improves user experience */}
-      <Text style={menuStyles.headingSection}>
-        How was your visit to Little Lemon?
-      </Text>
-      <Text style={menuStyles.infoSection}>
+    <>
+      {/* HEADER SECTION -> Displayed when showMenu state is false */}
+      <Text style={pretty.infoSection}>
         Little Lemon is a charming neighborhood bistro that serves simple food
-        and classic cocktails in a lively but casual environment. We would love
-        to hear your experience with us! Little Lemon is a charming neighborhood
-        bistro that serves simple food and classic cocktails in a lively but
-        casual environment. We would love to hear your experience with us!
-        Little Lemon is a charming neighborhood bistro that serves simple food
-        and classic cocktails in a lively but casual environment. We would love
-        to hear your experience with us!
+        and classic cocktails in a lively but casual environment. View our menu
+        to explore our cuisine with daily specials!
       </Text>
-
-      <KeyboardAvoidingView
-        behavior={Platform.OS === "android" ? "padding" : "position"}
-        style={menuStyles.container}
-      >
-        <TextInput
-          style={menuStyles.input}
-          value={firstName}
-          onChangeText={onChangeFirstName}
-          placeholder={"Your first name, e.g Freisser"}
-          multiline={true}
-          maxLength={4}
-          secureTextEntry={true}
-        />
-      </KeyboardAvoidingView>
-    </ScrollView>
+      {/* BUTTON -> Displayed Always. Pressable Component */}
+      <Pressable style={pretty.button} onPress={() => setShowMenu(!showMenu)}>
+        <Text style={pretty.buttonText}>{showMenu ? "Home" : "View Menu"}</Text>
+      </Pressable>
+      {/* MENU -> Data to be displayed using a section list */}
+      <SectionList
+        sections={menuItemsToDisplay}
+        renderItem={renderItem}
+        renderSectionHeader={renderSectionHeader}
+      />
+    </>
   );
 };
 
-const menuStyles = StyleSheet.create({
+const pretty = StyleSheet.create({
   container: {
-    flex: 1,
+    flex: 0.95,
   },
-  input: {
-    height: 40,
-    margin: 12,
-    borderWidth: 1,
-    padding: 10,
-    fontSize: 16,
-    borderColor: "#fff",
-    backgroundColor: "#fff",
+  innerContainer: {
+    paddingHorizontal: 40,
+    paddingVertical: 20,
+    backgroundColor: "#333333",
+  },
+  sectionHeader: {
+    backgroundColor: "#fbdabb",
+    color: "#333333",
+    fontSize: 34,
+    flexWrap: "wrap",
+    textAlign: "center",
+  },
+  itemText: {
+    color: "#F4CE14",
+    fontSize: 32,
+  },
+  separator: {
+    borderBottomWidth: 1,
+    borderColor: "#EDEFEE",
+  },
+  footerText: {
+    color: "#EDEFEE",
+    fontSize: 20,
+    flexWrap: "wrap",
+    textAlign: "center",
+  },
+  button: {
+    fontSize: 22,
+    padding: 5,
+    marginVertical: 8,
+    margin: 40,
+    backgroundColor: "#457b9d",
+    borderColor: "#457b9d",
+    borderWidth: 2,
+    borderRadius: 12,
+  },
+  buttonText: {
+    color: "#333333",
+    textAlign: "center",
+    fontSize: 32,
   },
   infoSection: {
     fontSize: 24,
-    padding: 20,
-    marginVertical: 8,
-    color: "#EDEFEE",
-    textAlign: "center",
-    backgroundColor: "#495E57",
-  },
-  headingSection: {
-    fontSize: 28,
     padding: 20,
     marginVertical: 8,
     color: "#EDEFEE",
