@@ -16,7 +16,7 @@ export default function App() {
         }}
       >
         <LittleLemonHeader />
-        <WelcomeScreen />
+        {/* <WelcomeScreen /> */}
         {/* <LoginPage /> */}
       </View>
       <View style={{ backgroundColor: "#495E57" }}>

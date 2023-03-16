@@ -1,5 +1,13 @@
 import React, { useState } from "react";
-import { StyleSheet, Text, Pressable, SectionList, View } from "react-native";
+import {
+  StyleSheet,
+  Text,
+  Pressable,
+  SectionList,
+  View,
+  TouchableOpacity,
+  Image,
+} from "react-native";
 
 //Data to be displayed -> MENU
 const menuItemsToDisplay = [
@@ -53,21 +61,29 @@ const WelcomeScreen = () => {
   return (
     <>
       {/* HEADER SECTION -> Displayed when showMenu state is false */}
-      <Text style={pretty.infoSection}>
-        Little Lemon is a charming neighborhood bistro that serves simple food
-        and classic cocktails in a lively but casual environment. View our menu
-        to explore our cuisine with daily specials!
-      </Text>
+      {!showMenu && (
+        <Text style={pretty.infoSection}>
+          Little Lemon is a charming neighborhood bistro that serves simple food
+          and classic cocktails in a lively but casual environment. View our
+          menu to explore our cuisine with daily specials!
+        </Text>
+      )}
       {/* BUTTON -> Displayed Always. Pressable Component */}
-      <Pressable style={pretty.button} onPress={() => setShowMenu(!showMenu)}>
-        <Text style={pretty.buttonText}>{showMenu ? "Home" : "View Menu"}</Text>
-      </Pressable>
+      <TouchableOpacity>
+        <Pressable style={pretty.button} onPress={() => setShowMenu(!showMenu)}>
+          <Text style={pretty.buttonText}>
+            {showMenu ? "Home" : "View Menu"}
+          </Text>
+        </Pressable>
+      </TouchableOpacity>
       {/* MENU -> Data to be displayed using a section list */}
-      <SectionList
-        sections={menuItemsToDisplay}
-        renderItem={renderItem}
-        renderSectionHeader={renderSectionHeader}
-      />
+      {showMenu && (
+        <SectionList
+          sections={menuItemsToDisplay}
+          renderItem={renderItem}
+          renderSectionHeader={renderSectionHeader}
+        />
+      )}
     </>
   );
 };
@@ -113,7 +129,7 @@ const pretty = StyleSheet.create({
     borderRadius: 12,
   },
   buttonText: {
-    color: "#333333",
+    color: "#fefae0",
     textAlign: "center",
     fontSize: 32,
   },
