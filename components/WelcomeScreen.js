@@ -6,7 +6,7 @@ import {
   SectionList,
   View,
   TouchableOpacity,
-  Image,
+  ImageBackground,
 } from "react-native";
 
 //Data to be displayed -> MENU
@@ -62,11 +62,18 @@ const WelcomeScreen = () => {
     <>
       {/* HEADER SECTION -> Displayed when showMenu state is false */}
       {!showMenu && (
-        <Text style={pretty.infoSection}>
-          Little Lemon is a charming neighborhood bistro that serves simple food
-          and classic cocktails in a lively but casual environment. View our
-          menu to explore our cuisine with daily specials!
-        </Text>
+        <ImageBackground
+          source={require("../img/LittleLemonBackground.png")}
+          resizeMode="center"
+          style={pretty.imgBackground}
+        >
+          <Text style={pretty.infoSection}>
+            {/* Little Lemon is a charming neighborhood bistro that serves simple
+            food and classic cocktails in a lively but casual environment. View
+            our menu to explore our cuisine with daily specials! */}
+            Welcome to Little Lemon
+          </Text>
+        </ImageBackground>
       )}
       {/* BUTTON -> Displayed Always. Pressable Component */}
       <TouchableOpacity>
@@ -139,7 +146,11 @@ const pretty = StyleSheet.create({
     marginVertical: 8,
     color: "#EDEFEE",
     textAlign: "center",
-    backgroundColor: "#495E57",
+  },
+  imgBackground: {
+    width: 300,
+    height: 400,
+    justifyContent: "center",
   },
 });
 

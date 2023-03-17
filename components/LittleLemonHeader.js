@@ -3,38 +3,15 @@ import { View, Text, Image, StyleSheet, ScrollView } from "react-native";
 export default function LittleLemonHeader() {
   return (
     <>
-      <ScrollView>
-        <View style={{ backgroundColor: "#EE9972" }}>
-          <Image
-            source={require("../img/picture 1.png")}
-            style={pretty.logo}
-            resizeMode="contain"
-            accessbile={true}
-            accessibilityText={"Picture 1"}
-          />
-        </View>
+      <View style={{ backgroundColor: "#EE9972" }}>
         <Image
-          source={require("../img/picture 2.png")}
-          style={pretty.logo}
+          source={require("../img/littleLemonLogo.png")}
           resizeMode="contain"
-          accessbile={true}
-          accessibilityText={"Picture 2"}
-        />
-        <Image
-          source={require("../img/picture 3.png")}
           style={pretty.logo}
-          resizeMode="contain"
           accessbile={true}
-          accessibilityText={"Picture 3"}
+          accessibilityLabel={"Little Lemon Logo"}
         />
-        <Image
-          source={require("../img/picture 4.png")}
-          style={pretty.logo}
-          resizeMode="contain"
-          accessbile={true}
-          accessibilityText={"Picture 4"}
-        />
-      </ScrollView>
+      </View>
     </>
   );
 }

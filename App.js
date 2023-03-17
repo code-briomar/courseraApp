@@ -1,5 +1,5 @@
 import * as React from "react";
-import { View } from "react-native";
+import { View, Text, StyleSheet, useColorScheme } from "react-native";
 
 import LittleLemonHeader from "./components/LittleLemonHeader";
 import LittleLemonFooter from "./components/LittleLemonFooter";
@@ -7,15 +7,19 @@ import WelcomeScreen from "./components/WelcomeScreen";
 import LoginPage from "./components/LoginPage";
 
 export default function App() {
+  // COLOR SCHEME BINDING
+  const colorScheme = useColorScheme();
+
   return (
     <>
       <View
-        style={{
-          flex: 1,
-          backgroundColor: "#495E57",
-        }}
+        style={[
+          pretty.container,
+          colorScheme === "dark" ? pretty.darkBG : pretty.lightBG,
+        ]}
       >
         <LittleLemonHeader />
+        <Text>Color Scheme is : {colorScheme}</Text>
         {/* <WelcomeScreen /> */}
         {/* <LoginPage /> */}
       </View>
@@ -25,3 +29,15 @@ export default function App() {
     </>
   );
 }
+
+const pretty = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
+  darkBG: {
+    backgroundColor: "#264653",
+  },
+  lightBG: {
+    backgroundColor: "#f6f4d2",
+  },
+});
