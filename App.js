@@ -1,5 +1,13 @@
 import * as React from "react";
-import { View, Text, StyleSheet, useColorScheme } from "react-native";
+import {
+  View,
+  Text,
+  StyleSheet,
+  useColorScheme,
+  useWindowDimensions,
+} from "react-native";
+
+import { useDeviceOrientation } from "@react-native-community/hooks";
 
 import LittleLemonHeader from "./components/LittleLemonHeader";
 import LittleLemonFooter from "./components/LittleLemonFooter";
@@ -9,7 +17,7 @@ import LoginPage from "./components/LoginPage";
 export default function App() {
   // COLOR SCHEME BINDING
   const colorScheme = useColorScheme();
-
+  const orientation = useDeviceOrientation();
   return (
     <>
       <View
@@ -20,6 +28,8 @@ export default function App() {
       >
         <LittleLemonHeader />
         <Text>Color Scheme is : {colorScheme}</Text>
+
+        <Text>Device Orientation is : {orientation.portrait}</Text>
         {/* <WelcomeScreen /> */}
         {/* <LoginPage /> */}
       </View>
