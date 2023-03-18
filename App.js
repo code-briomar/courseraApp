@@ -1,53 +1,45 @@
-import * as React from "react";
-import {
-  View,
-  Text,
-  StyleSheet,
-  useColorScheme,
-  useWindowDimensions,
-} from "react-native";
+// IMPORT REACT NAVIGATION
+import { NavigationContainer } from "@react-navigation/native";
+// IMPORT BOTTOM TABS NAVIGATOR
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 
-import { useDeviceOrientation } from "@react-native-community/hooks";
-
-import LittleLemonHeader from "./components/LittleLemonHeader";
-import LittleLemonFooter from "./components/LittleLemonFooter";
+// IMPORT SCREENS from `components` folder
 import WelcomeScreen from "./components/WelcomeScreen";
+import Login from "./components/LoginPage";
 import LoginPage from "./components/LoginPage";
+import { Ionicons } from "@expo/vector-icons";
 
-export default function App() {
-  // COLOR SCHEME BINDING
-  const colorScheme = useColorScheme();
-  const orientation = useDeviceOrientation();
+// CREATE INSTANCE OF `createBottomTabNavigator` function
+const Tab = createBottomTabNavigator();
+
+const App = () => {
   return (
-    <>
-      <View
-        style={[
-          pretty.container,
-          colorScheme === "dark" ? pretty.darkBG : pretty.lightBG,
-        ]}
+    <NavigationContainer>
+      <Tab.Navigator
+        screenOptions={({ route }) => ({
+          tabBarIcon: ({ focused, size, color }) => {
+            let iconName;
+
+            if (route.name === "Welcome") {
+              iconName = focused
+                ? "ios-information-cirlce"
+                : "ios-information-circle-outline";
+            } else if (route.name === "Login") {
+              iconName = focused ? "ios-list" : "ios-list-outline";
+            }
+
+            return <Ionicons name={iconName} size={size} color={color} />;
+          },
+
+          tabBarActiveTintColor: "tomato",
+          tabBarInactiveColor: "gray",
+        })}
       >
-        <LittleLemonHeader />
-        <Text>Color Scheme is : {colorScheme}</Text>
-
-        <Text>Device Orientation is : {orientation.portrait}</Text>
-        {/* <WelcomeScreen /> */}
-        {/* <LoginPage /> */}
-      </View>
-      <View style={{ backgroundColor: "#495E57" }}>
-        <LittleLemonFooter />
-      </View>
-    </>
+        <Tab.Screen name="Welcome" component={WelcomeScreen} />
+        <Tab.Screen name="Login" component={LoginPage} />
+      </Tab.Navigator>
+    </NavigationContainer>
   );
-}
+};
 
-const pretty = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-  darkBG: {
-    backgroundColor: "#264653",
-  },
-  lightBG: {
-    backgroundColor: "#f6f4d2",
-  },
-});
+export default App;

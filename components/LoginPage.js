@@ -61,15 +61,15 @@ const pretty = StyleSheet.create({
     flex: 0.5,
     justifyContent: "space-evenly",
     alignItems: "center",
+    backgroundColor: "#38a3a5",
   },
   loginBody: {
     flex: 1,
+    backgroundColor: "#38a3a5",
   },
   headerText: {
-    width: "54%",
-    fontSize: 24,
-    fontWeight: "semi-bold",
-    marginBottom: 20,
+    fontSize: 28,
+    fontWeight: "bold",
     color: "white",
   },
   bodyText: {
